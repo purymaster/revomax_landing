@@ -4,6 +4,17 @@ $(function () {
 		$('.ie9').fadeOut();
 	});
 
+	/******************** 페이지 이동 전, 애니메이션 효과 ********************/
+
+	var href;
+
+	$(document).find('a').on('click', function (e) {
+		href = $(this).attr('href');
+		$('.wrap').addClass('fadeout');
+		e.preventDefault();
+		setTimeout(function () { location.href = href; }, 300);
+	});
+
 	/******************** 스크롤 애니메이션 정의 ********************/
 
 	var move_el = $('[data-animation]'), //무빙 요소
@@ -11,7 +22,6 @@ $(function () {
 		move_delay, //순차무빙 딜레이
 		move_duration, //순차무빙 시간
 		scroll, //스크롤 값
-		start_point = $(window).height() * 0.95, //애니메이션 시작 높이(밑에서부터 화면 높이의 5%)
 		top_btn = $('.move_top'), //TOP 버튼
 		top_btn_flag = 0; //TOP 버튼 상태
 
@@ -35,23 +45,7 @@ $(function () {
 					'-webkit-animation-duration': move_duration + 'ms',
 					'animation-duration': move_duration + 'ms'
 				});
-			if (scroll > $(this).offset().top - start_point)
-				$(this).removeClass('wait-animation');
-		});
-
-		//TOP 버튼 제어
-		(scroll === 0) ? top_btn.removeClass('on') : top_btn.addClass('on');
-
-		top_btn.find('button').on('click', function () {
-			if (top_btn_flag) return false;
-			top_btn_flag = 1;
-			$('html, body').animate({
-				scrollTop: 0
-			}, function () {
-				top_btn_flag = 0;
-				top_btn.removeClass('on');
-			});
-			return false;
+			$(this).removeClass('wait-animation');
 		});
 
 	});
