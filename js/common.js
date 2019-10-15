@@ -4,16 +4,25 @@ $(function () {
 		$('.ie9').fadeOut();
 	});
 
-	/******************** 페이지 이동 전, 애니메이션 효과 ********************/
+	/******************** 페이지 스크롤링 ********************/
 
-	var href;
+	var page_val = 1;
 
-	$(document).find('a').on('click', function (e) {
-		href = $(this).attr('href');
-		$('.wrap').addClass('fadeout');
-		e.preventDefault();
-		setTimeout(function () { location.href = href; }, 300);
+	function set_page(val) {
+		$('.content:eq(' + val + '),.side_menu li:eq(' + val + ')').addClass('on').siblings().removeClass('on');
+	}
+
+	$('.side_menu').find('a').on('click', function () {
+		page_val = $(this).parent().index();
+		set_page(page_val);
 	});
+
+	setInterval(function () {
+		set_page(page_val);
+		page_val++;
+		if (page_val > 4) page_val = 0;
+	}, 3000);
+
 
 	/******************** 스크롤 애니메이션 정의 ********************/
 

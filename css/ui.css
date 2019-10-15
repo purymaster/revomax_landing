@@ -123,36 +123,41 @@ label {cursor:pointer;}
 =========================================================*/
 
 /* 레이아웃 */
-.wrap {overflow:hidden; min-height:640px; height:100%; background-position:center; background-size:cover;}
-.wrap:after {display:none\9; position:fixed; top:0; left:0; z-index:0; width:100%; height:100%; content:"";}
+.wrap {overflow:hidden; height:100%; min-height:640px; background:#000;}
+/* .wrap:after {display:none\9; position:fixed; top:0; left:0; z-index:0; width:100%; height:100%; content:"";}
 .wrap:after {background:#fff; transition:all 0.3s;}
 .wrap.animated:after {opacity:0;}
-.wrap.fadeout:after {opacity:1; z-index:15;}
-.content {display:table; position:relative; z-index:1; width:100%; height:100%; padding:0 120px; color:#fff;}
+.wrap.fadeout:after {opacity:1; z-index:15;} */
+.content {display:table; visibility:hidden; position:absolute; z-index:1; width:100%; height:100%; padding:0 120px; background-position:center; background-size:cover; color:#fff; transition:all 1s; opacity:0;}
+.content.on {visibility:visible; opacity:1;}
 .content .txt_box {display:table-cell; width:100%; vertical-align:middle;}
-.content .txt_box .txt_wrap {visibility:hidden; width:540px; transition:all 0.3s; transition-delay:1.2s; opacity:0;}
-.content .txt_box.animated .txt_wrap {visibility:visible; opacity:1;}
+.content .txt_box .txt_wrap {visibility:hidden; width:540px; transition:all 0.3s; opacity:0;}
+.content.on .txt_box .txt_wrap {visibility:visible; opacity:1;}
 .content .txt_box .main_tit {font-size:50px; font-weight:700; line-height:1.5em;}
+.content.on .txt_box .main_tit {animation:1s both fadeInDown; animation-delay:0.3s;}
 .content .txt_box .main_tit strong {display:block; font-size:1.6em; line-height:1.2em; white-space:nowrap;}
 .content .txt_box .hashtag {margin-top:20px; font-size:24px; line-height:1.5em; opacity:0.75;}
+.content.on .txt_box .hashtag {animation:1s both fadeInUp; animation-delay:0.7s;}
 .content .txt_box .hashtag span {display:inline-block; margin-right:5px;}
 .content .txt_box .sub_txt {position:relative; margin-top:60px; padding-top:20px; font-size:20px; line-height:1.7em;}
+.content.on .txt_box .sub_txt {animation:1s both fadeInUp; animation-delay:0.5s;}
 .content .txt_box .sub_txt:before {position:absolute; top:0; left:0; width:26px; height:6px; background:#fff; content:"";}
 .content .txt_box.white .txt_wrap {margin-left:80px; background:rgba(255,255,255,0.9); color:#333; padding:30px 50px;}
 .content .txt_box.white .sub_txt:before {background:#333;}
-.content .side_menu {position:absolute; z-index:1; right:120px; top:45%; margin-top:-260px;}
-.content .side_menu li {position:relative; padding:20px 0; text-align:right; transition:all 0.3s;}
-.content .side_menu li a {display:inline-block; position:relative;}
-.content .side_menu li a:after {position:absolute; right:0; bottom:-20px; width:30px; height:1px; background:#fff; transition:all 0.3s; opacity:0.7; content:"";}
-.content .side_menu li a:hover:after {width:100%;}
-.content .side_menu li small {display:block; font-size:16px; line-height:1.5em; color:#fff; transition:all 0.3s; opacity:0.7;}
-.content .side_menu li strong {display:block; margin-top:5px; font-size:24px; line-height:36px; color:#fff; transition:all 0.3s; opacity:0.7;}
-.content .side_menu li:hover:after,
-.content .side_menu li:hover small,
-.content .side_menu li.on small {opacity:1;}
-.content .side_menu li:hover strong,
-.content .side_menu li.on strong {font-size:28px; opacity:1;}
-.revomax_type {overflow:hidden; position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.8);}
+.side_menu {position:absolute; z-index:1; right:120px; top:45%; margin-top:-260px;}
+.side_menu li {position:relative; padding:20px 0; text-align:right; transition:all 0.3s; opacity:0;}
+.side_menu li a {display:inline-block; position:relative;}
+.side_menu li a:after {position:absolute; right:0; bottom:-20px; width:30px; height:1px; background:#fff; transition:all 0.3s; opacity:0.7; content:"";}
+.side_menu li.on a:after,
+.side_menu li a:hover:after {width:100% !important;}
+.side_menu li small {display:block; font-size:16px; line-height:1.5em; color:#fff; transition:all 0.3s; opacity:0.7;}
+.side_menu li strong {display:block; margin-top:5px; font-size:24px; line-height:36px; color:#fff; transition:all 0.3s; opacity:0.7;}
+.side_menu li:hover:after,
+.side_menu li:hover small,
+.side_menu li.on small {opacity:1;}
+.side_menu li:hover strong,
+.side_menu li.on strong {font-size:28px; opacity:1;}
+.revomax_type {overflow:hidden; position:absolute; bottom:0; left:0; z-index:1; width:100%; background:rgba(0,0,0,0.8);}
 .revomax_type li {float:left; position:relative; z-index:1; width:33.33%; text-align:right;}
 .revomax_type li a {display:block; padding:30px; padding-right:70px; transition:all 0.3s;}
 .revomax_type li a:hover {background:rgba(0,0,0,0.5);}
@@ -176,17 +181,16 @@ label {cursor:pointer;}
 
 @media (max-width:1024px) {
 	.content {padding:0 30px;}
-	.content .side_menu li {padding:15px 0;}
-	.content .side_menu li small {font-size:14px;}
-	.content .side_menu li strong {font-size:18px;}
 	.content .txt_box.white .txt_wrap {width:480px; margin-left:-30px; padding:15px 30px;}
 	.content .txt_box .main_tit {font-size:36px;}
 	.content .txt_box .hashtag {margin-top:15px; font-size:18px;}
 	.content .txt_box .sub_txt {margin-top:30px; font-size:18px;}
-	.content .side_menu {right:30px; margin-top:-215px;}
-	.content .side_menu li strong {line-height:30px;}
-	.content .side_menu li:hover strong,
-	.content .side_menu li.on strong {font-size:24px;}
+	.side_menu {right:30px; margin-top:-215px;}
+	.side_menu li {padding:15px 0;}
+	.side_menu li small {font-size:14px;}
+	.side_menu li strong {font-size:18px; line-height:30px;}
+	.side_menu li:hover strong,
+	.side_menu li.on strong {font-size:24px;}
 	.revomax_type li:before {transform:scale(0.5); transform-origin:left center;}
 	.revomax_type li .cmt {font-size:12px; white-space:nowrap;}
 	.revomax_type li strong {font-size:24px;}
@@ -203,13 +207,13 @@ label {cursor:pointer;}
 	.content .txt_box .hashtag {font-size:14px;}
 	.content .txt_box .sub_txt {margin-top:15px; font-size:12px;}
 	.content .txt_box .sub_txt:before {height:3px;}
-	.content .side_menu {top:30px; right:15px; margin:0;}
-	.content .side_menu li {padding:5px 0;}
-	.content .side_menu li a:after {bottom:-5px;}
-	.content .side_menu li small {font-size:10px;}
-	.content .side_menu li strong {margin:0; font-size:12px; line-height:1.5em;}
-	.content .side_menu li:hover strong,
-	.content .side_menu li.on strong {font-size:14px;}
+	.side_menu {top:30px; right:15px; margin:0;}
+	.side_menu li {padding:5px 0;}
+	.side_menu li a:after {bottom:-5px;}
+	.side_menu li small {font-size:10px;}
+	.side_menu li strong {margin:0; font-size:12px; line-height:1.5em;}
+	.side_menu li:hover strong,
+	.side_menu li.on strong {font-size:14px;}
 	.revomax_type li {float:none; width:100%;}
 	.revomax_type li:before {left:15px !important; margin-top:-21px;}
 	.revomax_type li:after {top:auto; bottom:0; width:100%; height:1px; border:0; border-bottom:1px dashed #fff;}
@@ -316,4 +320,8 @@ header img {height:49px;}
 .fadeInLeft {-webkit-animation-name:fadeInLeft; animation-name:fadeInLeft;}
 .fadeInRight {-webkit-animation-name:fadeInRight; animation-name:fadeInRight;}
 .wait-animation {opacity:0; animation-play-state:paused;}
-.animated {animation-duration:1s; animation-fill-mode:both; opacity:1 \0/IE8+9 !important;}
+.animated {animation-duration:1s; animation-fill-mode:both;}
+
+@media (min-width:0\0){
+	.animated {opacity:1 !important;}
+}
